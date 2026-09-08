@@ -4,6 +4,12 @@ desc: 将 DSH（DeepSeek Harness）与 QQ 双向桥接：QQ 消息自动转发�
 short_desc: DSH ↔ QQ 双向桥接，多会话切换，图片文件支持
 version: v1.1.0
 author: yvdi-abc
+repo: https://github.com/yvdi-abc/astrbot_plugin_dsh_bridge.git
+astrbot_version: \>=4.16,\<5
 support_platforms:
   - aiocqhttp
-astrbot_version: ">=4.16,<5"
+tags:
+  - bridge
+  - dsh
+  - two-way
+  - forwarding
