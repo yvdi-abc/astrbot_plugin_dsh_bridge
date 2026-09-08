@@ -1,0 +1,115 @@
+{
+  "enable": {
+    "description": "是否启用插件",
+    "type": "bool",
+    "default": true
+  },
+  "dsh_base_url": {
+    "description": "DSH 服务地址",
+    "type": "string",
+    "default": "http://127.0.0.1:3080",
+    "hint": "DSH Web 服务的地址，本机默认 127.0.0.1:3080"
+  },
+  "agent_preset": {
+    "description": "创建 DSH 会话时使用的 Agent 预设（空=默认standard）",
+    "type": "string",
+    "default": "minimal",
+    "options": ["minimal", "standard", "code", "cordis", ""],
+    "hint": "minimal=极简模式（纯AI助手），standard=标准模式，code=PTC模式"
+  },
+  "pure_mode": {
+    "description": "纯净模式：转发到DSH后阻止AstrBot主LLM回复，避免机器人自带人设干扰",
+    "type": "bool",
+    "default": true,
+    "hint": "开启后桥接消息不会触发AstrBot自己的角色人设回复，只有DSH纯净回复"
+  },
+  "pure_mode_instruction": {
+    "description": "纯净模式附加指令（附加到每次发给DSH的消息，可选）",
+    "type": "text",
+    "default": "",
+    "hint": "例如：请以纯粹的AI助手身份回答，不要角色扮演。留空则不加"
+  },
+  "whitelist_enable": {
+    "description": "是否启用白名单（启用后仅白名单内的群/用户可用）",
+    "type": "bool",
+    "default": true
+  },
+  "whitelist_groups": {
+    "description": "允许的群号列表（空=不限制）",
+    "type": "list",
+    "default": [],
+    "hint": "填入群号，如 [\"123456789\"]"
+  },
+  "whitelist_users": {
+    "description": "允许的用户QQ号列表（空=不限制）",
+    "type": "list",
+    "default": [],
+    "hint": "填入QQ号，如 [\"123456\"]"
+  },
+  "poll_interval": {
+    "description": "DSH 回复轮询间隔（秒）",
+    "type": "int",
+    "default": 3,
+    "hint": "每隔多少秒检查一次 DSH 会话是否有新回复"
+  },
+  "auto_forward": {
+    "description": "QQ 消息自动转发到 DSH",
+    "type": "bool",
+    "default": true,
+    "hint": "关闭后需使用 /dsh 发送 <内容> 手动转发"
+  },
+  "trigger_mode": {
+    "description": "转发触发方式：at=仅@机器人的消息转发（推荐，防止群内其他消息打扰）；all=全部转发（适合自用群）；prefix=指定前缀开头才转发",
+    "type": "string",
+    "default": "at",
+    "options": ["at", "all", "prefix"],
+    "hint": "自用群（只有你和bot）建议用 all 最省事；多人群用 at 防止打扰"
+  },
+  "trigger_prefix": {
+    "description": "触发前缀（trigger_mode=prefix 时生效）",
+    "type": "string",
+    "default": "dsh:",
+    "hint": "以此前缀开头的消息才转发到DSH"
+  },
+  "reply_forward": {
+    "description": "DSH 回复发送方式：plain=纯文本分段，forward=合并转发",
+    "type": "string",
+    "default": "plain",
+    "options": ["plain", "forward"],
+    "hint": "plain 直接发送（长回复自动分段），forward 打包为合并转发"
+  },
+  "forward_threshold": {
+    "description": "回复超过此字符数才使用合并转发（reply_forward=forward 时生效）",
+    "type": "int",
+    "default": 500
+  },
+  "bot_name": {
+    "description": "合并转发中显示的 Bot 名称",
+    "type": "string",
+    "default": "DSH助手"
+  },
+  "enable_history_forward": {
+    "description": "切换会话后是否默认转发历史消息",
+    "type": "bool",
+    "default": false,
+    "hint": "true=切换后把该会话最近的历史发到QQ，false=只转发新消息"
+  },
+  "notify_mode": {
+    "description": "进度通知模式：final=只通知最终结果（推荐，安静）；turn=每轮完成+工具执行通知；step=每步都通知；off=不通知（仅手动查询）",
+    "type": "string",
+    "default": "final",
+    "options": ["final", "turn", "step", "off"],
+    "hint": "插件初衷是让DSH汇报进度：final=干活完通知结果，turn=每轮汇报，step=最细粒度"
+  },
+  "notify_tool_result": {
+    "description": "是否通知工具执行结果（如文件修改完成、命令执行完毕）",
+    "type": "bool",
+    "default": true,
+    "hint": "开启后 DSH 每次执行工具（bash/文件操作等）完成都会通知进度"
+  },
+  "notify_tool_result_max_len": {
+    "description": "工具结果通知的最大字符数（超出截断）",
+    "type": "int",
+    "default": 200
+  }
+}
